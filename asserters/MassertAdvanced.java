@@ -1,5 +1,6 @@
 package asserters;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -32,6 +33,12 @@ public class MassertAdvanced<T> extends Massert<T> {
 	public void doRun() {
 		for (Run run : toRun) {
 			assertMethodIsCorrect(toUse, getExpectedResult(run.methodName, run.params), run.params, run.methodName);
+		}
+	}
+
+	public void testFields() {
+		for (Field field : toReference.getClass().getDeclaredFields()) {
+			assertFieldIs(field.getName(), field.getType());
 		}
 	}
 
